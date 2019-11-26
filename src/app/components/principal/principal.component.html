@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="jumbotron">
+
+    <h1>Things for do</h1>
+
+    <div class="form-group">
+      <label for="">What in going to do?</label>
+      <div [formGroup]="formulario" class="input-group mb-3">
+            <input formControlName="thing" type="text" class="form-control" placeholder="Escribe tu tarea" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="getThing()" *ngIf="formulario.valid">Guardar tarea</button>
+            </div>
+          </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+       <table class="table table-striped table-inverse text-center">
+         <thead>
+           <tr>
+             <th>Task</th>
+             <th>Date Create</th>
+             <th> Change status </th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let thing of Things">
+             <td scope="row">{{thing.thing}}</td>
+             <td>{{thing.created_date|date:'dd/MM/yyyy'}}</td>
+             <td>
+               <button type="button"  class="btn" [ngClass]="{'btn-outline-success': thing.complete,'btn-outline-danger': !thing.complete}" (click)="CambiarStatus(thing)">
+                <span *ngIf="!thing.complete">Finalizar Tarea</span>
+                <span *ngIf="thing.complete">Tarea finalizada</span>
+               </button>
+
+               <button type="button"  class="btn btn-outline-dark  ml-2 " (click)="eliminartarea(thing._id)">Eliminar tarea</button>
+
+           
+             </td>
+           </tr>
+          
+         </tbody>
+       </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
